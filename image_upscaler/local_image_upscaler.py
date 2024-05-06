@@ -12,8 +12,8 @@ def image_upscaler(input_file_name: str, output_file_name: str, upscale_modifier
     upscaled_image = upscaler_model(input_image)    
     ImageLoader.save_image(upscaled_image, output_file_name)    
 
-def convert_files(upscale_modifier: int, input_directory: str, output_directory: str, files_list: list[str]):
-    with ThreadPoolExecutor(max_workers = 4) as executor: 
+def convert_files(upscale_modifier: int, input_directory: str, output_directory: str, files_list: list[str], max_workers: int = 4):
+    with ThreadPoolExecutor(max_workers = max_workers) as executor: 
         for file_name in files_list: 
             file_extension = file_name.split(".")[-1].lower()
 
@@ -24,4 +24,4 @@ def convert_files(upscale_modifier: int, input_directory: str, output_directory:
 
 if (__name__ == "__main__"):
     files_list = os.listdir("C:/Users/User/Downloads")
-    convert_files(4, "C:/Users/User/Downloads", "C:/Users/User/Pictures", files_list)
+    convert_files(4, "C:/Users/User/Downloads", "C:/Users/User/Pictures", files_list, 3)
