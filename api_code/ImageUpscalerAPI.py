@@ -1,7 +1,7 @@
-import io, json
+import json, base64
 
-from PIL   import Image
-from flask import Flask, jsonify, request, send_file
+from PIL   import Image 
+from flask import Flask, request, jsonify
 
 from image_upscaler.image_upscaler import image_upscaler
 
@@ -14,7 +14,7 @@ def upscale_image():
     image_modifier  = int(request.form["upscale_modifier"])
     processed_image = image_upscaler(original_name, binary_image, image_modifier)
     
-    return json.dumps({"processed_image" : processed_image})
+    return jsonify({"processed_image" : base64.b64encode(processed_image).decode("utf-8")})
 
 if (__name__ == "__main__"):
     flask_image_upscaler_interface.run()
