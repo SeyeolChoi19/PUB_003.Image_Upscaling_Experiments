@@ -1,0 +1,16 @@
+import requests 
+
+with open("C:/Users/User/Downloads/random_image.jpg", "rb") as image_file:
+    api_url  = "http://127.0.0.1:5000/convert"
+    response = requests.post(
+        api_url, 
+        data = {
+            "image_name"       : "random_image.jpg",
+            "upscale_modifier" : 4
+        },
+        files = {
+            "image_file" : image_file
+        }
+    )
+
+response.json()
