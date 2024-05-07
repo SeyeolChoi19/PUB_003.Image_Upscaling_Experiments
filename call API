@@ -16,3 +16,9 @@ with open("random_image.jpg", "rb") as image_file:
         files = file_dict, 
         data  = params
     )
+
+import base64, io
+
+from PIL import Image
+
+Image.open(io.BytesIO(base64.b64decode(response.json()["processed_image"]))).show()
